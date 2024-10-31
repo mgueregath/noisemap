@@ -46,11 +46,11 @@ if poligonos3.crs is None:
 crs_objetivo = {'init': 'epsg:4326'}
 
 poligonos1 = poligonos1.to_crs(crs_objetivo)
-poligonos1['nivel_ruido'] = 50
+poligonos1['nivel_ruido'] = 42
 poligonos2 = poligonos2.to_crs(crs_objetivo)
-poligonos2['nivel_ruido'] = 62
+poligonos2['nivel_ruido'] = 78
 poligonos3 = poligonos3.to_crs(crs_objetivo)
-poligonos3['nivel_ruido'] = 75
+poligonos3['nivel_ruido'] = 62
 
 geometries = []
 nivel_ruido = []
