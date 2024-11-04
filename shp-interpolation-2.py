@@ -125,5 +125,5 @@ combined_geojson = {
 }
 
 # Save the final combined GeoJSON file
-with open('valdivia2024_combined_contours_streets.geojson', 'w') as geojson_file:
+with open('valdivia2024_combined_streets_last.geojson', 'w') as geojson_file:
     json.dump(combined_geojson, geojson_file)

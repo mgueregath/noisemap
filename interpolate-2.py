@@ -63,7 +63,7 @@ def rapid_decay_exponential_idw(x_coords, y_coords, values, grid_x, grid_y, powe
     return grid_z
 
 # Perform the rapid exponential decay IDW interpolation
-y_pred_rapid_decay = rapid_decay_exponential_idw(X[:, 0], X[:, 1], y, lon_grid, lat_grid, power=2, max_distance=0.00035, decay_rate=100.0)
+y_pred_rapid_decay = rapid_decay_exponential_idw(X[:, 0], X[:, 1], y, lon_grid, lat_grid, power=2, max_distance=0.0003, decay_rate=1.0)
 
 # Apply Gaussian smoothing
 y_pred_smoothed_rapid_decay = gaussian_filter(y_pred_rapid_decay, sigma=1)
@@ -95,14 +95,13 @@ for noise_level in [68.8, 66.7, 63.9]:
             break
 
 # Plot the noise map
-fig, ax = plt.subplots(figsize=(10, 10))
+fig, ax = plt.subplots(figsize=(15, 15))
 noise_map = ax.contourf(lon_grid, lat_grid, y_pred_smoothed_rapid_decay, levels=bounds_provided, cmap=cmap_provided, norm=norm_provided)
 
 # Add colorbar and labels
-plt.colorbar(noise_map, ax=ax, label='Nivel de Ruido (Leq)')
-ax.set_title('Mapa de Ruido con Propagación Reducida y Decaimiento Exponencial Rápido')
-ax.set_xlabel('Longitud')
-ax.set_ylabel('Latitud')
+#plt.colorbar(noise_map, ax=ax, label='Nivel de Ruido (Leq)')
+
+ax.axis('off')  # Remove axes
 
 # Plot streets with reduced line thickness and rapid decay model
 for noise_level, color in road_noise_colors.items():
@@ -118,3 +117,9 @@ for noise_level, color in road_noise_colors.items():
     subset.plot(ax=ax, color=color, linewidth=0.8, zorder=3)
 
 plt.show()
+
+output_path = './mapa_ruido_clean.png'  # Define the output file path
+fig.savefig(output_path, dpi=300, bbox_inches='tight', pad_inches=0, transparent=True)
+
+# Close the figure to free up memory
+plt.close(fig)
